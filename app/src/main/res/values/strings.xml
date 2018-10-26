@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AppBanHang</string>
+    <string name="regis_email">Email</string>
+    <string name="regis_pass">Password</string>
+    <string name="regis_repass">Confirm Password</string>
+    <string name="regis_register">Register</string>
+    <string name="regis_account">New Account</string>
+    <string name="login_email">Username</string>
+    <string name="login_pass">Password</string>
+    <string name="login_facebook">Login with your Facebook</string>
+    <string name="login_now">Login Now</string>
+    <string name="login_signup">Signup Now</string>
+</resources>
