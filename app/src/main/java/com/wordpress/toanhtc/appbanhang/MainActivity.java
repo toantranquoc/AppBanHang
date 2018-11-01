@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             Picasso.with(getApplicationContext()).load(mangQuangcao.get(i)).into(imageView);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             viewFlipper.addView(imageView);
-            viewFlipper.setFlipInterval(4000);
+            viewFlipper.setFlipInterval(3000);
             viewFlipper.setAutoStart(true);
         }
     }

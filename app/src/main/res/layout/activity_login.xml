@@ -21,8 +21,7 @@
             android:layout_height="80dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_launcher_round"
-            android:background="@drawable/grad_bg"/>
+            android:src="@mipmap/ic_launcher_phone"/>
 
         <RelativeLayout
             android:id="@+id/rellay1"
@@ -68,7 +67,8 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:inputType="textEmailAddress"/>
 
                 </LinearLayout>
 
@@ -120,18 +120,16 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
-            <Button
+            <com.facebook.login.widget.LoginButton
+                xmlns:facebook="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/btnLoginFacebook"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_below="@+id/btnLogin"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/btn_bg"
                 android:fontFamily="sans-serif-medium"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="@string/login_facebook"
+                facebook:com_facebook_login_text="@string/login_facebook"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -156,22 +154,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
+            android:layout_alignParentRight="true"
             android:fontFamily="sans-serif"
             android:text="@string/login_signup"
             android:textAllCaps="true"
             android:textColor="@color/white" />
-
-        <Button
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@color/transparent"
-            android:fontFamily="sans-serif"
-            android:text="Forgot Password?"
-            android:textAllCaps="true"
-            android:textColor="@color/white" />
-
     </RelativeLayout>
 
 </RelativeLayout>

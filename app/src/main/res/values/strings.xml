@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AppBanHang</string>
-    <string name="regis_email">Email</string>
+    <string name="regis_user">User</string>
     <string name="regis_pass">Password</string>
     <string name="regis_repass">Confirm Password</string>
     <string name="regis_register">Register</string>
@@ -10,4 +10,13 @@
     <string name="login_facebook">Login with your Facebook</string>
     <string name="login_now">Login Now</string>
     <string name="login_signup">Signup Now</string>
+    <string name="facebook_app_id">2404145793180298</string>
+    <string name="fb_login_protocol_scheme">fb2404145793180298</string>
+    <string name="require_infor">This field is required</string>
+    <string name="pass_match">Password not match</string>
+    <string name="regist_success">Regist Success</string>
+    <string name="check_connect">Check your Internet</string>
+    <string name="regist_fail">Regist Fail</string>
+    <string name="login_success">Login Successfully</string>
+    <string name="login_fail">Username or Password not correct</string>
 </resources>
