@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText user, password, confirmpass;
     Button register;
     ProgressBar loading;
-    public static final String REGISTER_URL = "http://192.168.1.4:8888/sever/register.php";
+    public static final String REGISTER_URL = "http://192.168.1.9:8888/sever/register.php";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     @Override

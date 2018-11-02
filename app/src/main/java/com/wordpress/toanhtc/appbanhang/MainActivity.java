@@ -5,15 +5,26 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -24,13 +35,64 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ListView listView;
     DrawerLayout drawerLayout;
+    ArrayList<SanPham> mangsanpham;
+    SanPhamAdapter sanPhamAdapter;
+    public static String URL_NEWSP = "http://192.168.1.3:8888/sever/getspmoinhat.php";
+    public static String URL_TYPESP = "http://192.168.1.3:8888/sever/getloaisp.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AnhXa();
-        ActionBar();
-        ActionViewFlipper();
+        if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            ActionBar();
+            ActionViewFlipper();
+            GetDuLieuSpMoiNhat();
+        }
+        else
+        {
+            Toast.makeText(this , getApplication().getResources().getString(R.string.check_connect), Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+    private void GetDuLieuSpMoiNhat() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL_NEWSP, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response!= null)
+                {
+                    int ID = 0;
+                    String Tensp = "";
+                    Integer Gia  = 0;
+                    String Hinhanhsp ="";
+                    String Motasp = "";
+                    int Idloaisanpham = 0;
+                    for(int i = 0; i<response.length(); i++)
+                    {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            ID = jsonObject.getInt("id");
+                            Tensp = jsonObject.getString("tensp");
+                            Gia = jsonObject.getInt("giasp");
+                            Hinhanhsp = jsonObject.getString("hinhanhsp");
+                            Motasp = jsonObject.getString("motasp");
+                            Idloaisanpham = jsonObject.getInt("idsanpham");
+                            mangsanpham.add(new SanPham(ID,Tensp,Gia,Hinhanhsp,Motasp,Idloaisanpham));
+                            sanPhamAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), ""+ error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
     }
 
     private void ActionViewFlipper() {
@@ -70,5 +132,11 @@ public class MainActivity extends AppCompatActivity {
         navigationView = (NavigationView)findViewById(R.id.navigationview);
         listView = (ListView) findViewById(R.id.listviewmanhinhchinh);
         drawerLayout  = (DrawerLayout) findViewById(R.id.drawerlayout);
+        mangsanpham = new ArrayList<>();
+        sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), mangsanpham);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+        recyclerView.setAdapter(sanPhamAdapter);
+
     }
 }
