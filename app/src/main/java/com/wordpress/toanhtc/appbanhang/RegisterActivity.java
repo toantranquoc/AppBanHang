@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText user, password, confirmpass;
     Button register;
     ProgressBar loading;
-    public static final String REGISTER_URL = "http://192.168.1.9:8888/sever/register.php";
+    public static final String REGISTER_URL = "http://192.168.1.6:8888/sever/register.php";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     @Override
@@ -96,21 +96,23 @@ public class RegisterActivity extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(response);
                                 if (jsonObject.getInt("success") == 1)
                                 {
-                                    Toast.makeText(getApplicationContext(), getApplication().getResources().getString(R.string.regist_success), Toast.LENGTH_SHORT).show();
+                                    mess = jsonObject.getString("message");
+                                    Toast.makeText(getApplicationContext(),  mess , Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent();
                                     intent.putExtra(LoginActivity.USER_NAME_LOGIN, User);
                                     setResult(RESULT_OK,intent);
                                     finish();
                                 }
                                 else{
-
-                                    Toast.makeText(getApplicationContext(), getApplication().getResources().getString(R.string.regist_fail), Toast.LENGTH_SHORT).show();
+                                    mess = jsonObject.getString("message");
+                                    Toast.makeText(getApplicationContext(),mess, Toast.LENGTH_SHORT).show();
                                     loading.setVisibility(View.GONE);
                                     register.setVisibility(View.VISIBLE);
 
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), e.getMessage() + "", Toast.LENGTH_LONG).show();
                             }
 
                         }

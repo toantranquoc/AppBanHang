@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:title="Sản phẩm">
+    <menu>
+        <item android:title="APPLE"
+            android:id="@+id/apple"
+            android:icon="@drawable/apple"/>
+        <item android:title="SAMSUNG"
+            android:id="@+id/samsung"
+            android:icon="@drawable/samsung"/>
+        <item android:title="OPPO"
+            android:id="@+id/oppo"
+            android:icon="@drawable/oppo"/>
+        <item android:title="XIAOMI"
+            android:id="@+id/xiaomi"
+            android:icon="@drawable/xiaomi"/>
+    </menu>
+</item>
+    <group android:checkableBehavior="single">
+        <item android:title="Thông tin"
+            android:id="@+id/thongtin"
+            android:icon="@drawable/ic_info_drawer"/>
+        <item android:title="Liên lạc"
+            android:icon="@drawable/ic_contacts_drawer"
+            android:id="@+id/contact"/>
+    </group>
+</menu>

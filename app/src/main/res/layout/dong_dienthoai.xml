@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="4dp"
+    android:background="@color/white">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageviewDienthoai"
+            android:layout_margin="2dp"
+            android:adjustViewBounds="true"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:paddingTop="3dp"
+                android:layout_margin="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:id="@+id/txtTenDienthoai"
+                android:text="Tên Sản Phẩm"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giá"
+                android:textSize="18sp"
+                android:layout_margin="3dp"
+                android:textColor="#fa152c"
+                android:id="@+id/txtGiaDienthoai"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô Tả"
+                android:id="@+id/txtMotaDienthoai"
+                android:textSize="18sp"
+                android:layout_margin="3dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+</LinearLayout>

@@ -61,10 +61,10 @@ public class LoginActivity extends AppCompatActivity {
             rellay2.setVisibility(View.VISIBLE);
         }
     };
-    public static final String LOGIN_URL = "http://192.168.1.9:8888/sever/login.php";
+    public static final String LOGIN_URL = "http://192.168.1.6:8888/sever/login.php";
     public static  final String USER_NAME_LOGIN = "USER_NAME";
     public static final int REQUEST_CODE_REGISTER = 1;
-    public static final String USER_TO_MAIN = "USER_TO_MAIN";
+    public static final String USER_TO_MAIN = "USER_MAIN";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,8 +125,8 @@ public class LoginActivity extends AppCompatActivity {
                                         mess = jsonObject.getString("message");
                                         Toast.makeText(getApplicationContext(),getApplication().getResources().getString(R.string.login_success) , Toast.LENGTH_SHORT).show();
                                         Intent main = new Intent(LoginActivity.this, MainActivity.class);
-                                        main.putExtra("USER_TO_MAIN", User);
                                         startActivity(main);
+                                        finish();
 
                                     }
                                     else

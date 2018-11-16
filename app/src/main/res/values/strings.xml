@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppBanHang</string>
+    <string name="app_name">DPSG</string>
     <string name="regis_user">User</string>
     <string name="regis_pass">Password</string>
     <string name="regis_repass">Confirm Password</string>
