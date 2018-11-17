@@ -1,9 +1,15 @@
 package com.wordpress.toanhtc.appbanhang;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toolbar;
 
@@ -28,6 +34,10 @@ public class DienThoaiActivity extends AppCompatActivity {
     ListView listViewdt;
     DienThoaiAdapter dienThoaiAdapter;
     ArrayList<SanPham> mangdienthoai;
+    boolean isLoading = false;
+    boolean limitData = false;
+    mHandler mHandler;
+    View footerview;
     int idloaisp = 0;
     int page = 1;
     String URL_SANPHAM= "http://192.168.1.110:8888/sever/getsanpham.php?page=";
@@ -36,9 +46,43 @@ public class DienThoaiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dien_thoai);
         AnhXa();
-        GetIDLoaiSp();
-        ActionToolbar();
-        GetData(page);
+        if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            GetIDLoaiSp();
+            ActionToolbar();
+            GetData(page);
+            LoadMoreData();
+        }
+        else {
+            CheckConnection.showToast_Connect(getApplicationContext(), "Check your internet");
+            finish();
+        }
+    }
+
+    private void LoadMoreData() {
+        listViewdt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), ChiTietSanPhamActivity.class);
+                intent.putExtra("thongtinsp", mangdienthoai.get(i));
+                startActivity(intent);
+            }
+        });
+        listViewdt.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int FirstItem, int VisibleItem, int TotalItem) {
+                if(FirstItem + VisibleItem == TotalItem && TotalItem !=0  && isLoading == false && limitData == false)
+                {
+                    isLoading = true;
+                    ThreadData threadData = new ThreadData();
+                    threadData.start();
+                }
+            }
+        });
     }
 
     private void GetData(int Page) {
@@ -53,8 +97,9 @@ public class DienThoaiActivity extends AppCompatActivity {
                 String hinhanhdt = "";
                 String motadt = "";
                 int idspdt = 0;
-                if(response != null)
+                if(response != null && response.length() != 2 )
                 {
+                    listViewdt.removeFooterView(footerview);
                     try {
                         JSONArray jsonArray = new JSONArray(response);
                         for(int i = 0; i<jsonArray.length(); i++)
@@ -72,6 +117,12 @@ public class DienThoaiActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+                else
+                {
+                    limitData = true;
+                    listViewdt.removeFooterView(footerview);
+                    CheckConnection.showToast_Connect(getApplicationContext(),"Hết dữ liệu sản phẩm!");
                 }
 
 
@@ -115,5 +166,40 @@ public class DienThoaiActivity extends AppCompatActivity {
         mangdienthoai = new ArrayList<>();
         dienThoaiAdapter = new DienThoaiAdapter(getApplicationContext(), mangdienthoai);
         listViewdt.setAdapter(dienThoaiAdapter);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        footerview = inflater.inflate(R.layout.progress_bar, null);
+        mHandler = new mHandler();
+    }
+    public class mHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what)
+            {
+                case 0:
+                    listViewdt.addFooterView(footerview);
+                    break;
+                case 1:
+                    GetData(++page);
+                    isLoading = false;
+                    break;
+            }
+            super.handleMessage(msg);
+
+        }
+    }
+    public class ThreadData extends Thread{
+        @Override
+        public void run() {
+            mHandler.sendEmptyMessage(0);
+            try {
+                Thread.sleep(3000);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Message message = mHandler.obtainMessage(1);
+            mHandler.sendMessage(message);
+            super.run();
+        }
     }
 }
