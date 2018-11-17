@@ -1,12 +1,14 @@
 package com.wordpress.toanhtc.appbanhang;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -56,6 +58,16 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ItemHold
             imghinhsanpham = (ImageView) itemView.findViewById(R.id.imageviewsanpham);
             txttensanpham = (TextView) itemView.findViewById(R.id.txttensanpham);
             txtgiasanpham = (TextView) itemView.findViewById(R.id.txtgiasanpham);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent inforsp = new Intent(context, ChiTietSanPhamActivity.class);
+                    inforsp.putExtra("thongtinsp", arraysanpham.get(getPosition()));
+                    inforsp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Toast.makeText(context,arraysanpham.get(getPosition()).getTensanpham(),Toast.LENGTH_SHORT).show();
+                    context.startActivity(inforsp);
+                }
+            });
         }
     }
 

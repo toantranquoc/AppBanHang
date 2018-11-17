@@ -1,6 +1,8 @@
 package com.wordpress.toanhtc.appbanhang;
 
-public class SanPham {
+import java.io.Serializable;
+
+public class SanPham implements Serializable {
     public int ID;
     public String Tensanpham;
     public Integer Giasanpham;
