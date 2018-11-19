@@ -45,7 +45,8 @@
         <activity android:name=".DienThoaiActivity" />
         <activity android:name=".ThongTinActivity" />
         <activity android:name=".LienLacActivity" />
-        <activity android:name=".ChiTietSanPhamActivity"></activity>
+        <activity android:name=".ChiTietSanPhamActivity" />
+        <activity android:name=".GioHangActivity"></activity>
     </application>
 
 </manifest>

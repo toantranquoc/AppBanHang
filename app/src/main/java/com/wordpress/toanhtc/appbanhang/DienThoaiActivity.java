@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -40,7 +42,7 @@ public class DienThoaiActivity extends AppCompatActivity {
     View footerview;
     int idloaisp = 0;
     int page = 1;
-    String URL_SANPHAM= "http://192.168.1.110:8888/sever/getsanpham.php?page=";
+    String URL_SANPHAM= "http://192.168.1.6:8888/sever/getsanpham.php?page=";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,23 @@ public class DienThoaiActivity extends AppCompatActivity {
             finish();
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_cart, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menuCart:
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void LoadMoreData() {
         listViewdt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -97,7 +115,7 @@ public class DienThoaiActivity extends AppCompatActivity {
                 String hinhanhdt = "";
                 String motadt = "";
                 int idspdt = 0;
-                if(response != null && response.length() != 2 )
+                if(response != null && response.length() > 2 )
                 {
                     listViewdt.removeFooterView(footerview);
                     try {

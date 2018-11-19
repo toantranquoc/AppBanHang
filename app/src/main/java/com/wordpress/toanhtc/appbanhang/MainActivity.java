@@ -12,6 +12,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout drawerLayout;
     ArrayList<SanPham> mangsanpham;
     SanPhamAdapter sanPhamAdapter;
-    public static String URL_NEWSP = "http://192.168.1.110:8888/sever/getspmoinhat.php";
+    public static String URL_NEWSP = "http://192.168.1.6:8888/sever/getspmoinhat.php";
+    public static ArrayList<GioHang> manggiohang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,24 @@ public class MainActivity extends AppCompatActivity{
             Toast.makeText(this , getApplication().getResources().getString(R.string.check_connect), Toast.LENGTH_SHORT).show();
             finish();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_cart, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menuCart:
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void SelectMenu() {
@@ -189,5 +209,11 @@ public class MainActivity extends AppCompatActivity{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(sanPhamAdapter);
+        if(manggiohang != null)
+        {}
+        else
+        {
+            manggiohang = new ArrayList<>();
+        }
     }
 }
