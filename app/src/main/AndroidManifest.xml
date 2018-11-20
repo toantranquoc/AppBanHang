@@ -46,7 +46,7 @@
         <activity android:name=".ThongTinActivity" />
         <activity android:name=".LienLacActivity" />
         <activity android:name=".ChiTietSanPhamActivity" />
-        <activity android:name=".GioHangActivity"></activity>
+        <activity android:name=".GioHangActivity" />
     </application>
 
 </manifest>

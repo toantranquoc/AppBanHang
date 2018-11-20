@@ -42,9 +42,10 @@ public class GioHangAdapter extends BaseAdapter {
         public ImageView hinhanhgiohang;
         public Button tru, giatri, cong;
     }
+    ViewHolder  viewHolder = null;
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder = null;
+    public View getView(final int i, View view, ViewGroup viewGroup) {
+
         if (view == null)
         {
             viewHolder = new ViewHolder();
@@ -70,6 +71,75 @@ public class GioHangAdapter extends BaseAdapter {
                 .error(R.drawable.erroricon)
                 .into(viewHolder.hinhanhgiohang);
         viewHolder.giatri.setText(gioHang.getSoluongsp()+ "");
+        int soluong = Integer.parseInt(viewHolder.giatri.getText().toString());
+        if (soluong >=10)
+        {
+            viewHolder.cong.setVisibility(View.INVISIBLE);
+            viewHolder.tru.setVisibility(View.VISIBLE);
+        }
+        else
+            if (soluong <= 1)
+            {
+                viewHolder.cong.setVisibility(View.VISIBLE);
+                viewHolder.tru.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                viewHolder.cong.setVisibility(View.VISIBLE);
+                viewHolder.tru.setVisibility(View.VISIBLE);
+            }
+            viewHolder.cong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   int slmoinhat = Integer.parseInt(viewHolder.giatri.getText().toString()) + 1;
+                   int slhientai = MainActivity.manggiohang.get(i).getSoluongsp();
+                   long giahientai = MainActivity.manggiohang.get(i).getGiasp();
+                   MainActivity.manggiohang.get(i).setSoluongsp(slmoinhat);
+                   long giamoinhat = (giahientai * slmoinhat) / slhientai;
+                   MainActivity.manggiohang.get(i).setGiasp(giamoinhat);
+                    DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                    viewHolder.giagiohang.setText(decimalFormat.format(giamoinhat)+ " Đ");
+                    GioHangActivity.EvenUlti();
+                    if (slmoinhat > 9)
+                    {
+                        viewHolder.cong.setVisibility(View.INVISIBLE);
+                        viewHolder.tru .setVisibility(View.VISIBLE);
+                        viewHolder.giatri.setText(String.valueOf(MainActivity.manggiohang.get(i).getSoluongsp()));
+                    }
+                    else
+                    {
+                        viewHolder.cong.setVisibility(View.VISIBLE);
+                        viewHolder.tru .setVisibility(View.VISIBLE);
+                        viewHolder.giatri.setText(String.valueOf(MainActivity.manggiohang.get(i).getSoluongsp()));
+                    }
+                }
+            });
+        viewHolder.tru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int slmoinhat = Integer.parseInt(viewHolder.giatri.getText().toString()) - 1;
+                int slhientai = MainActivity.manggiohang.get(i).getSoluongsp();
+                long giahientai = MainActivity.manggiohang.get(i).getGiasp();
+                MainActivity.manggiohang.get(i).setSoluongsp(slmoinhat);
+                long giamoinhat = (giahientai * slmoinhat) / slhientai;
+                MainActivity.manggiohang.get(i).setGiasp(giamoinhat);
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                viewHolder.giagiohang.setText(decimalFormat.format(giamoinhat)+ " Đ");
+                GioHangActivity.EvenUlti();
+                if (slmoinhat < 2)
+                {
+                    viewHolder.cong.setVisibility(View.VISIBLE);
+                    viewHolder.tru .setVisibility(View.INVISIBLE);
+                    viewHolder.giatri.setText(String.valueOf(MainActivity.manggiohang.get(i).getSoluongsp()));
+                }
+                else
+                {
+                    viewHolder.cong.setVisibility(View.VISIBLE);
+                    viewHolder.tru .setVisibility(View.VISIBLE);
+                    viewHolder.giatri.setText(String.valueOf(MainActivity.manggiohang.get(i).getSoluongsp()));
+                }
+            }
+        });
         return view;
 
     }

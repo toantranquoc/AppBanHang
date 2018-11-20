@@ -42,7 +42,7 @@ public class DienThoaiActivity extends AppCompatActivity {
     View footerview;
     int idloaisp = 0;
     int page = 1;
-    String URL_SANPHAM= "http://192.168.1.6:8888/sever/getsanpham.php?page=";
+    String URL_SANPHAM= "http://192.168.1.2:8888/sever/getsanpham.php?page=";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

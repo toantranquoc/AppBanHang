@@ -10,22 +10,20 @@
     android:paddingTop="60dp"
     android:background="@drawable/grad_bg"
     tools:context=".RegisterActivity">
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/regis_account"
             android:gravity="center"
-            android:textColor="#111223de"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="50sp"/>
-    </android.support.design.widget.TextInputLayout>
+            android:textSize="45sp"/>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="40dp">
         <EditText
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
