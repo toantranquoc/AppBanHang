@@ -47,6 +47,7 @@
         <activity android:name=".LienLacActivity" />
         <activity android:name=".ChiTietSanPhamActivity" />
         <activity android:name=".GioHangActivity" />
+        <activity android:name=".ThongtinKhachhang"></activity>
     </application>
 
 </manifest>

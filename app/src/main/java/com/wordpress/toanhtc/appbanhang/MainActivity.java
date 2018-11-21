@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity{
             ActionViewFlipper();
             GetDuLieuSpMoiNhat();
             SelectMenu();
-
         }
         else
         {
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity{
             finish();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,38 +88,43 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
-                    case R.id.apple: Toast.makeText(getApplicationContext(), "Apple",Toast.LENGTH_LONG).show();
+                    case R.id.apple:
                         Intent apple = new Intent(MainActivity.this, DienThoaiActivity.class);
                         apple.putExtra("idloaisanpham",1);
                         startActivity(apple);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.samsung: Toast.makeText(getApplicationContext(), "SAMSUNG",Toast.LENGTH_LONG).show();
+                    case R.id.samsung:
                         Intent samsung = new Intent(MainActivity.this, DienThoaiActivity.class);
                         samsung.putExtra("idloaisanpham",2);
                         startActivity(samsung);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.oppo: Toast.makeText(getApplicationContext(), "OPPO",Toast.LENGTH_LONG).show();
+                    case R.id.oppo:
                         Intent oppo = new Intent(MainActivity.this, DienThoaiActivity.class);
                         oppo.putExtra("idloaisanpham",3);
                         startActivity(oppo);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.xiaomi: Toast.makeText(getApplicationContext(), "XIAOMI",Toast.LENGTH_LONG).show();
+                    case R.id.xiaomi:
                         Intent xiaomi = new Intent(MainActivity.this, DienThoaiActivity.class);
                         xiaomi.putExtra("idloaisanpham",4);
                         startActivity(xiaomi);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.thongtin: Toast.makeText(getApplicationContext(), "Information",Toast.LENGTH_LONG).show();
-                        Intent thongtin = new Intent(MainActivity.this, ThongTinActivity.class);
+                    case R.id.thongtin:
+                        Intent thongtin = new Intent(MainActivity.this, ThongtinKhachhang.class);
                         startActivity(thongtin);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.contact: Toast.makeText(getApplicationContext(), "Contact",Toast.LENGTH_LONG).show();
+                    case R.id.contact:
                         Intent lienlac = new Intent(MainActivity.this, LienLacActivity.class);
                         startActivity(lienlac);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case R.id.menusignout:
+                        Intent signout = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(signout);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }

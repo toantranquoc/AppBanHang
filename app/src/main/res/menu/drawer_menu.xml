@@ -23,5 +23,8 @@
         <item android:title="Liên lạc"
             android:icon="@drawable/ic_contacts_drawer"
             android:id="@+id/contact"/>
+        <item android:id="@+id/menusignout"
+            android:title="Đăng xuất"
+            android:icon="@drawable/ic_log_out"/>
     </group>
 </menu>

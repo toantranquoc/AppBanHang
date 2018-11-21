@@ -46,7 +46,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class LoginActivity extends AppCompatActivity {
     RelativeLayout rellay1, rellay2;
     CallbackManager callbackManager;
@@ -64,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
     public static final String LOGIN_URL = "http://192.168.1.2:8888/sever/login.php";
     public static  final String USER_NAME_LOGIN = "USER_NAME";
     public static final int REQUEST_CODE_REGISTER = 1;
-    public static final String USER_TO_MAIN = "USER_MAIN";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
