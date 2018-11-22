@@ -119,6 +119,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+
             <com.facebook.login.widget.LoginButton
                 xmlns:facebook="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/btnLoginFacebook"
@@ -132,6 +133,14 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loadingLogin"
+                android:layout_below="@+id/btnLogin"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                />
 
         </RelativeLayout>
 
@@ -156,6 +165,16 @@
             android:layout_alignParentRight="true"
             android:fontFamily="sans-serif"
             android:text="@string/login_signup"
+            android:textAllCaps="true"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/btnChangLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="sans-serif"
+            android:text="@string/login_language"
             android:textAllCaps="true"
             android:textColor="@color/white" />
     </RelativeLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DPSG</string>
+    <string name="regis_user">로그인 이름</string>
+    <string name="regis_pass">암호</string>
+    <string name="regis_repass">암호 확인</string>
+    <string name="regis_register">등록</string>
+    <string name="regis_tooshort">비밀번호가 너무 짧습니다</string>
+    <string name="regis_cancel">취소</string>
+    <string name="regis_account">새 계정</string>
+    <string name="login_email">로그인 이름</string>
+    <string name="login_pass">암호</string>
+    <string name="login_facebook">페이스 북 가입</string>
+    <string name="login_now">로그인</string>
+    <string name="login_signup">가입</string>
+    <string name="facebook_app_id">2404145793180298</string>
+    <string name="fb_login_protocol_scheme">fb2404145793180298</string>
+    <string name="require_infor">이 필드는 필수 항목입니다</string>
+    <string name="pass_match">비밀번호가 일치하지 않습니다</string>
+    <string name="regist_success">성공적인 등록</string>
+    <string name="check_connect">인터넷 연결을 확인하십시오</string>
+    <string name="regist_fail">등록 실패</string>
+    <string name="login_success">성공적으로 로그인</string>
+    <string name="login_fail">사용자 이름 또는 암호가 올바르지 않습니다</string>
+    <string name="login_language">언어 변경</string>
+</resources>

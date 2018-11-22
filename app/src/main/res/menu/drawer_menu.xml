@@ -17,7 +17,7 @@
     </menu>
 </item>
     <group android:checkableBehavior="single">
-        <item android:title="Thông tin"
+        <item android:title="Thông tin của bạn"
             android:id="@+id/thongtin"
             android:icon="@drawable/ic_info_drawer"/>
         <item android:title="Liên lạc"

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DPSG</string>
+    <string name="regis_user">ユーザー名</string>
+    <string name="regis_pass">パスワード</string>
+    <string name="regis_repass">パスワードを認証する</string>
+    <string name="regis_register">登録</string>
+    <string name="regis_tooshort">パスワードが非常に弱い</string>
+    <string name="regis_cancel">キャンセル</string>
+    <string name="regis_account">新しいアカウント</string>
+    <string name="login_email">ユーザー名</string>
+    <string name="login_pass">パスワード</string>
+    <string name="login_facebook">Facebook でログイン</string>
+    <string name="login_now">ここでログイン</string>
+    <string name="login_signup">今すぐ申し込む</string>
+    <string name="facebook_app_id">2404145793180298</string>
+    <string name="fb_login_protocol_scheme">fb2404145793180298</string>
+    <string name="require_infor">この項目は必須です</string>
+    <string name="pass_match">パスワードが一致しません</string>
+    <string name="regist_success">登録に成功しました</string>
+    <string name="check_connect">インターネット接続を確認する</string>
+    <string name="regist_fail">登録に失敗しました</string>
+    <string name="login_success">ログイン成功</string>
+    <string name="login_fail">ユーザー名かパスワードが間違っています</string>
+    <string name="login_language">言語を変えてください</string>
+</resources>

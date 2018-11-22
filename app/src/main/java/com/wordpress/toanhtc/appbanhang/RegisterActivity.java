@@ -30,9 +30,9 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText user, password, confirmpass;
-    Button register;
+    Button register,cancel;
     ProgressBar loading;
-    public static final String REGISTER_URL = "http://192.168.1.2:8888/sever/register.php";
+    public static final String REGISTER_URL = "http://192.168.1.3:8888/sever/register.php";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     @Override
@@ -40,12 +40,24 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         AnhXa();
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Regist();
-            }
-        });
+        if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Regist();
+                }
+            });
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+        }
+        else
+        {
+            CheckConnection.showToast_Connect(getApplicationContext(), getApplicationContext().getResources().getString(R.string.check_connect));
+        }
     }
 
     private void AnhXa() {
@@ -54,6 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         confirmpass = (EditText) findViewById(R.id.edtConfirmPass);
         register = (Button) findViewById(R.id.btnRegister);
         loading = (ProgressBar) findViewById(R.id.loading);
+        cancel  = (Button) findViewById(R.id.btnBack);
     }
     private void Regist() {
         boolean error = false;
@@ -84,7 +97,14 @@ public class RegisterActivity extends AppCompatActivity {
             error = true;
             loading.setVisibility(View.GONE);
             register.setVisibility(View.VISIBLE);
-
+        }
+        if(Password.length() < 8)
+        {
+            password.requestFocus();
+            password.setError(getApplicationContext().getResources().getString(R.string.regis_tooshort));
+            error = true;
+            loading.setVisibility(View.GONE);
+            register.setVisibility(View.VISIBLE);
         }
         if (!error) {
             StringRequest registerRequest = new StringRequest(Request.Method.POST, REGISTER_URL,

@@ -1,10 +1,14 @@
 package com.wordpress.toanhtc.appbanhang;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.content.res.Configuration;
 import android.nfc.Tag;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -44,13 +49,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     RelativeLayout rellay1, rellay2;
     CallbackManager callbackManager;
     LoginButton loginButton;
-    Button tranRegis, signin;
+    Button tranRegis, signin, changeLanguage;
+    ProgressBar loadinglogin;
     EditText user, password;
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -60,13 +67,14 @@ public class LoginActivity extends AppCompatActivity {
             rellay2.setVisibility(View.VISIBLE);
         }
     };
-    public static final String LOGIN_URL = "http://192.168.1.2:8888/sever/login.php";
+    public static final String LOGIN_URL = "http://192.168.1.3:8888/sever/login.php";
     public static  final String USER_NAME_LOGIN = "USER_NAME";
     public static final int REQUEST_CODE_REGISTER = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loadLocate();
         rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
         rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
         handler.postDelayed(runnable, 2000);
@@ -75,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             TrantoRegister();
             Login_Facebook();
+            ChangeLanguage();
             signin.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -93,18 +102,89 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void ChangeLanguage() {
+        changeLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showChangeLanguage();
+            }
+        });
+    }
+    private void showChangeLanguage(){
+        final String[] listLanguage = {"English","Việt Nam","Korean","Japanese"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setTitle("Choose Language");
+        builder.setSingleChoiceItems(listLanguage, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(i == 0)
+                {
+                    setLocate("en");
+                    recreate();
+                }
+                else
+                    if(i == 1)
+                    {
+                        setLocate("vi");
+                        recreate();
+                    }
+                    else
+                        if(i == 2 )
+                        {
+                            setLocate("ko");
+                            recreate();
+                        }
+                        else
+                            if (i == 3)
+                            {
+                                setLocate("ja");
+                                recreate();
+                            }
+                            dialogInterface.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void setLocate(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Settings",MODE_PRIVATE).edit();
+        editor.putString("My_lang", language);
+        editor.apply();
+    }
+    private void loadLocate()
+    {
+        SharedPreferences preferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = preferences.getString("My_lang","");
+        setLocate(language);
+    }
+
     private void Log_in(){
+            loadinglogin.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.GONE);
+            signin.setVisibility(View.GONE);
             final String User = this.user.getText().toString().trim();
             final String Pass = this.password.getText().toString().trim();
             boolean error = false;
             if(TextUtils.isEmpty(User))
             {
+                loadinglogin.setVisibility(View.GONE);
+                loginButton.setVisibility(View.VISIBLE);
+                signin.setVisibility(View.VISIBLE);
                 user.requestFocus();
                 user.setError(getApplicationContext().getResources().getString(R.string.require_infor));
                 error = true;
             }
             if(TextUtils.isEmpty(Pass))
             {
+                loadinglogin.setVisibility(View.GONE);
+                loginButton.setVisibility(View.VISIBLE);
+                signin.setVisibility(View.VISIBLE);
                 password.requestFocus();
                 password.setError(getApplicationContext().getResources().getString(R.string.require_infor));
                 error = true;
@@ -129,6 +209,9 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                     else
                                     {
+                                        loadinglogin.setVisibility(View.GONE);
+                                        loginButton.setVisibility(View.VISIBLE);
+                                        signin.setVisibility(View.VISIBLE);
                                         mess = jsonObject.getString("message");
                                         Toast.makeText(getApplicationContext(),getApplication().getResources().getString(R.string.login_fail), Toast.LENGTH_SHORT).show();
                                     }
@@ -181,6 +264,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(FacebookException exception) {
+                    loadinglogin.setVisibility(View.GONE);
+                    loginButton.setVisibility(View.VISIBLE);
+                    signin.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -205,7 +291,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (LoginButton) findViewById(R.id.btnLoginFacebook);
         user  =(EditText) findViewById(R.id.ediLoginUser);
         password = (EditText) findViewById(R.id.edtLoginPassword);
-
+        loadinglogin = (ProgressBar) findViewById(R.id.loadingLogin);
+        changeLanguage = (Button) findViewById(R.id.btnChangLanguage);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

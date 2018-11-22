@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Khách Hàng"
+        android:text="Nhận hàng"
         android:textAllCaps="true"
         android:gravity="center"
         android:textColor="@color/white"
