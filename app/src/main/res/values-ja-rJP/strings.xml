@@ -23,4 +23,5 @@
     <string name="login_success">ログイン成功</string>
     <string name="login_fail">ユーザー名かパスワードが間違っています</string>
     <string name="login_language">言語を変えてください</string>
+    <string name="title_activity_lien_lac">Map</string>
 </resources>

@@ -23,4 +23,5 @@
     <string name="login_success">Login Successfully</string>
     <string name="login_fail">Username or Password not correct</string>
     <string name="login_language">Change Language</string>
+    <string name="title_activity_lien_lac">Map</string>
 </resources>

@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             rellay2.setVisibility(View.VISIBLE);
         }
     };
-    public static final String LOGIN_URL = "http://192.168.1.3:8888/sever/login.php";
+    public static final String LOGIN_URL = "http://192.168.1.2:8888/sever/login.php";
     public static  final String USER_NAME_LOGIN = "USER_NAME";
     public static final int REQUEST_CODE_REGISTER = 1;
     @Override

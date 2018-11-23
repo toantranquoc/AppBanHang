@@ -23,4 +23,5 @@
     <string name="login_success">Đăng nhập thành công</string>
     <string name="login_fail">Tài khoản hoặc mật khẩu không chính xác</string>
     <string name="login_language">Thay đổi ngôn ngữ</string>
+    <string name="title_activity_lien_lac">Map</string>
 </resources>

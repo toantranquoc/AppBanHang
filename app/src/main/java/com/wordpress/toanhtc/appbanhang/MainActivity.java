@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout drawerLayout;
     ArrayList<SanPham> mangsanpham;
     SanPhamAdapter sanPhamAdapter;
-    public static String URL_NEWSP = "http://192.168.1.3:8888/sever/getspmoinhat.php";
+    public static String URL_NEWSP = "http://192.168.1.2:8888/sever/getspmoinhat.php";
     public static ArrayList<GioHang> manggiohang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +125,11 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.menusignout:
                         Intent signout = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(signout);
+                        ThongTinActivity.emailKh = "";
+                        ThongTinActivity.nameKh = "";
+                        ThongTinActivity.phoneKh = "";
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        finish();
                         break;
                 }
                 return false;
