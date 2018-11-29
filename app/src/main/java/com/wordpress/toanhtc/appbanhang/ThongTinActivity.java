@@ -29,9 +29,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ThongTinActivity extends AppCompatActivity {
-    public static String URL_DONHANG = "http://192.168.1.2:8888/sever/thongtinkhachhang.php";
-    public static String URL_CHITIETDONHANG = "http://192.168.1.2:8888/sever/chitietdonhang.php";
-    public static String nameKh = "",phoneKh="", emailKh="";
+    public static String URL_DONHANG = "http://dpsg.000webhostapp.com/sever/thongtinkhachhang.php";
+    public static String URL_CHITIETDONHANG = "http://dpsg.000webhostapp.com/sever/chitietdonhang.php";
+    public static String nameKh ,phoneKh , emailKh;
     Button save, cancel;
     EditText namekh, phonekh, emailkh;
     ProgressBar load;

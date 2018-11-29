@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             rellay2.setVisibility(View.VISIBLE);
         }
     };
-    public static final String LOGIN_URL = "http://192.168.1.2:8888/sever/login.php";
+    public static final String LOGIN_URL = "http://dpsg.000webhostapp.com/sever/login.php";
     public static  final String USER_NAME_LOGIN = "USER_NAME";
     public static final int REQUEST_CODE_REGISTER = 1;
     @Override
@@ -246,7 +246,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             final Intent manHinh = new Intent(this, MainActivity.class);
             callbackManager = CallbackManager.Factory.create();
-            loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_gender"));
+            loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
             loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {

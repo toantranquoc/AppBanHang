@@ -72,12 +72,6 @@ public class GioHangAdapter extends BaseAdapter {
                 .into(viewHolder.hinhanhgiohang);
         viewHolder.giatri.setText(gioHang.getSoluongsp()+ "");
         int soluong = Integer.parseInt(viewHolder.giatri.getText().toString());
-        if (soluong >=10)
-        {
-            viewHolder.cong.setVisibility(View.INVISIBLE);
-            viewHolder.tru.setVisibility(View.VISIBLE);
-        }
-        else
             if (soluong <= 1)
             {
                 viewHolder.cong.setVisibility(View.VISIBLE);
@@ -100,18 +94,9 @@ public class GioHangAdapter extends BaseAdapter {
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                     viewHolder.giagiohang.setText(decimalFormat.format(giamoinhat)+ " Đ");
                     GioHangActivity.EvenUlti();
-                    if (slmoinhat > 9)
-                    {
-                        viewHolder.cong.setVisibility(View.INVISIBLE);
-                        viewHolder.tru .setVisibility(View.VISIBLE);
-                        viewHolder.giatri.setText(String.valueOf(MainActivity.manggiohang.get(i).getSoluongsp()));
-                    }
-                    else
-                    {
-                        viewHolder.cong.setVisibility(View.VISIBLE);
-                        viewHolder.tru .setVisibility(View.VISIBLE);
-                        viewHolder.giatri.setText(String.valueOf(MainActivity.manggiohang.get(i).getSoluongsp()));
-                    }
+                    viewHolder.cong.setVisibility(View.VISIBLE);
+                    viewHolder.tru .setVisibility(View.VISIBLE);
+                    viewHolder.giatri.setText(String.valueOf(MainActivity.manggiohang.get(i).getSoluongsp()));
                 }
             });
         viewHolder.tru.setOnClickListener(new View.OnClickListener() {

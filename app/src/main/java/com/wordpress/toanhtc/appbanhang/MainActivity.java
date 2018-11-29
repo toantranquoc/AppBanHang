@@ -1,5 +1,8 @@
 package com.wordpress.toanhtc.appbanhang;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -26,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout drawerLayout;
     ArrayList<SanPham> mangsanpham;
     SanPhamAdapter sanPhamAdapter;
-    public static String URL_NEWSP = "http://192.168.1.2:8888/sever/getspmoinhat.php";
+    public static String URL_NEWSP = "http://dpsg.000webhostapp.com/sever/getspmoinhat.php";
     public static ArrayList<GioHang> manggiohang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,13 +127,17 @@ public class MainActivity extends AppCompatActivity{
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.menusignout:
-                        Intent signout = new Intent(MainActivity.this, LoginActivity.class);
+                        /*Intent signout = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(signout);
                         ThongTinActivity.emailKh = "";
                         ThongTinActivity.nameKh = "";
                         ThongTinActivity.phoneKh = "";
-                        drawerLayout.closeDrawer(GravityCompat.START);
+                        manggiohang.clear();
                         finish();
+                        */
+
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        ProcessPhoenix.triggerRebirth(MainActivity.this);
                         break;
                 }
                 return false;
